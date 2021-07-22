@@ -2,30 +2,54 @@
 
 class  VehiculeManager
 {
+    //---------ATTRIBUTS-----------------
     private $_db; //correspondra à l'instance PDO pour la connexion à la BDD
     private $_param; // paramètre contenant les comandes sql en fonction du type d'objet
+
+    //----------CONSTRUCT-------------
     public function __construct($_db)
     {
         $this->setDb($_db);
     }
 
+    //---------------METHODS---------------
 
+
+    //--------getter setter
     public function setDb($db)
     {
         $this->_db = $db;
     }
+    public function getDb($db)
+    {
+        return $this->_db = $db;
+    }
+    public function get_param()
+    {
+        return $this->_param;
+    }
+    public function set_param($param)
+    {
+        $this->_param = $param;
+        return $this;
+    }
+
+
+    //----------ACTIONS
+    //-------------------
+
     public function add($vehic)
     {
-
+        //parametres depending of object type
         $this->prepareFor($vehic);
+        //recupération des parametres
         $par = $this->get_param();
         //on !! PREPARE !! la requete
         $req = $this->_db->prepare(
             "INSERT  INTO vehicules  (" . $par->getSqlColString() . ")
              VALUE (" . $par->getSqlPreparedValues() . ")"
         );
-
-
+        //on bind les values selon les parametres
         foreach ($par->getSqlCol() as $key => $value) {
             $method = 'get' . ucfirst($value);
             if (method_exists($vehic, $method)) {
@@ -70,22 +94,25 @@ class  VehiculeManager
         );
         $data = $req->fetch(PDO::FETCH_ASSOC);
 
+        //selon les données l'objet retourné serra de type different
         if ($data["vehicType"] == "voiture") {
             return new Voiture($data);
         }
-
         if ($data["vehicType"] == "camion") {
             return new Camion($data);
         }
     }
+
     public function  getAll()
     {
         $req = $this->_db->query(
             "SELECT * FROM vehicules"
         );
+        //l'array d'objet retournés
         $tabVehic = [];
-        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
 
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            //selon les données l'objet retourné serra de type different
             if ($data["vehicType"] == "voiture") {
                 array_push($tabVehic, new Voiture($data));
             } else if ($data["vehicType"] == "camion") {
@@ -94,6 +121,10 @@ class  VehiculeManager
         }
         return $tabVehic;
     }
+
+
+
+
     public function getByType($type)
     {
         $req = $this->_db->query(
@@ -122,39 +153,13 @@ class  VehiculeManager
             SET " . $par->getSqlUpdateString() .
                 "WHERE id='" . $vehic->getId() . "'"
         );
-
-
         //on execute la requete
         $req->execute();
     }
 
-    /**
-     * Get the value of _param
-     */
-    public function get_param()
-    {
-        return $this->_param;
-    }
-
-    /**
-     * Set the value of _param
-     *
-     * @return  self
-     */
-    public function set_param($param)
-    {
-
-        $this->_param = $param;
-
-        return $this;
-    }
     public function prepareFor($obj)
     {
-
         $col = $obj->getAttributs();
-
-
-
         $this->set_param(new ManagerParameters($col));
     }
 }

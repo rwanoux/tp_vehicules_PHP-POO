@@ -1,4 +1,5 @@
 <?php
+//-----class returning sql string for the manager
 class ManagerParameters
 {
     private $sqlCol;

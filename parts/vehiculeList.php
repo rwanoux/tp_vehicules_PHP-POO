@@ -21,7 +21,7 @@
 <div class="accordion accordion-flush" id="accordionVehic">
     <?php
     $listCount = 1; //counter for unique id for accordions
-    foreach ($vehiculeList as $ind => $vehic) {
+    foreach ($vehiculeList as $ind => $vehic) { //starting iterate on vehicules
     ?>
 
 
@@ -29,7 +29,6 @@
 
         <!-- model and marque as accordion header-->
         <h4 class="accordion-header card-header" id="heading<?php echo $listCount ?>">
-
             <button class="accordion-button collapsed 
             <?php
             //if editing this vehicule => special class for highlighted background
@@ -50,8 +49,9 @@
             aria-labelledby="heading<?php echo $listCount ?>" data-bs-parent="#accorddionVehic">
             <div class="accordion-body card body">
 
-                <!--buttons for editing/deleting this vehicule-->
+                <!--form for editing/deleting this vehicule-->
                 <form action="#" method="post" class="text-end">
+
                     <!--button EDIT sending the id of edited vehicule in hidden input-->
                     <button class="btn btn-warning" name="edit" type="submit" value="prepareEdit">
                         <input name="id" hidden value="<?php echo $vehic->getId(); ?>">
@@ -72,7 +72,9 @@
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
                         </svg>
                     </button>
+
                 </form>
+
 
                 <!--displaying vehicule's attributs thrue responsive columns--->
                 <div class="row">
@@ -116,31 +118,30 @@
                         }
                         if ($vehic->getVehicType() == "camion") {
                         ?>
-                </div>
-                <div class="col-md-4">
-                    <h6>cargaison</h6>
-                    <p><?php echo $vehic->getCargaison(); ?></p>
-                </div>
 
-                <div class="col-md-4">
-                    <h6>capacité de stockage</h6>
-                    <p><?php echo $vehic->getCapaStockage(); ?></p>
-                </div>
+                    <div class="col-md-4">
+                        <h6>cargaison</h6>
+                        <p><?php echo $vehic->getCargaison(); ?></p>
+                    </div>
 
-                <?php
+                    <div class="col-md-4">
+                        <h6>capacité de stockage</h6>
+                        <p><?php echo $vehic->getCapaStockage(); ?></p>
+                    </div>
+
+                    <?php
                         }
-                ?>
+                        ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<?php
+
+    <?php
         $listCount++;
     }
     //ending iterate on vehicules
-?>
-
-
+    ?>
 </div>

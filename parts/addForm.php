@@ -1,4 +1,5 @@
 <?php
+//switching title if editing
 if (isset($vehiculeToEdit)) {
     echo " <h2 class='text-center'> formulaire d'édition de véhicule</h2>";
 } else {
@@ -7,11 +8,15 @@ if (isset($vehiculeToEdit)) {
 ?>
 
 <form method="post" action="#" class="
-<?php if (isset($vehiculeToEdit)) {
+<?php
+//special class for editing =>highlighted background
+if (isset($vehiculeToEdit)) {
     echo "editing";
 } ?> p-1" enctype="multipart/form-data">
 
-
+    <!-------------------------------------------------------------------------------------------------------->
+    <!--each row for one attribut ; if editing => forcing value of input with edited vehicule attribut value-->
+    <!-------------------------------------------------------------------------------------------------------->
     <div class="row">
         <div class="input-group">
             <div class="input-group-prepend  ">
@@ -85,6 +90,8 @@ if (isset($vehiculeToEdit)) {
                     ?> required type="number" id="vitesse" name="vitesse" class="text-end form-control">
         </div>
     </div>
+
+    <!--------------radio buttons for vehicule type--------------------->
     <div class="row">
         <div class="input-group">
             <div class="input-group-prepend  ">
@@ -118,6 +125,8 @@ if (isset($vehiculeToEdit)) {
             </div>
         </div>
     </div>
+
+    <!--------------special attributs for voiture--------------------->
     <div id="formSpeVoiture">
         <div class="row">
             <div class="input-group">
@@ -144,6 +153,8 @@ if (isset($vehiculeToEdit)) {
             </div>
         </div>
     </div>
+
+    <!--------------special attributs for camion--------------------->
     <div id="formSpeCamion">
         <div class="row">
             <div class="input-group">
@@ -171,6 +182,8 @@ if (isset($vehiculeToEdit)) {
         </div>
     </div>
 
+    <!--------------special submit for editing--------------------->
+
     <?php
     if (isset($vehiculeToEdit)) {
     ?>
@@ -192,6 +205,9 @@ if (isset($vehiculeToEdit)) {
             annuler
         </a>
     </div>
+
+    <!--------------special submit for creating--------------------->
+
     <?php
     } else {
     ?>
