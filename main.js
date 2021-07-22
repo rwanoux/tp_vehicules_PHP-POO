@@ -1,8 +1,9 @@
+// the two special parts of the form 
 let camSpec = document.getElementById("formSpeCamion");
 let voitSpec = document.getElementById("formSpeVoiture");
 
 window.addEventListener("load", init);
-
+//once load i init the display of special parts
 function init() {
 
     if (document.getElementById('vehicTypeVoit').checked) {
@@ -14,7 +15,7 @@ function init() {
         camSpec.removeAttribute('hidden');
     }
 }
-
+//when we change the vehicule type the special form parts toggles
 let vehicType = document.getElementsByName("vehicType");
 for (let radio of vehicType) {
     radio.addEventListener('change', function (ev) {

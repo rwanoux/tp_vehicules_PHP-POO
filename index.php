@@ -1,7 +1,7 @@
 <?php
 //import connexion
 require('managers/connectDataBase.php'); //pdo
-require('class/ManagerParameters.php');
+require('class/ManagerParameters.php'); //parametres du manager
 
 //import class
 require('managers/VehiculeManager.php');
@@ -9,7 +9,7 @@ require('class/Vehicule.php'); //abstract mère
 require('class/Voiture.php');
 require('class/Camion.php');
 
-
+//my only one manager
 $myManager_Vehicule = new VehiculeManager($pdo);
 
 ?>
@@ -30,12 +30,14 @@ $myManager_Vehicule = new VehiculeManager($pdo);
 
 
     <?php
+    //gere les requetes 
     require_once("managers/managerActions.php")
 
     ?>
 
-
-
+    <!-- -------->
+    <!-- HEADER-->
+    <!-- -------->
     <header class="bg-warning mb-5 text-center text-lg-start">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 
@@ -47,6 +49,9 @@ $myManager_Vehicule = new VehiculeManager($pdo);
 
 
 
+    <!-- -------->
+    <!-- main section-->
+    <!-- magic happen here-------->
     <div class="container-fluid ">
         <div class="row">
             <div class="col-md-6 py-5 bg-secondary">
@@ -58,8 +63,6 @@ $myManager_Vehicule = new VehiculeManager($pdo);
             </div>
 
             <div class="col-md-6 py-5 bg-secondary">
-                <h2 class="text-center">liste des véhicules</h2>
-
                 <?php
                 // list des véhicules
                 include('parts/vehiculeList.php');
@@ -69,6 +72,9 @@ $myManager_Vehicule = new VehiculeManager($pdo);
     </div>
 
 
+    <!-- -------->
+    <!-- FOOTER-->
+    <!-- -------->
     <footer class="bg-warning mt-5 text-center text-lg-start">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
@@ -81,6 +87,7 @@ $myManager_Vehicule = new VehiculeManager($pdo);
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--my js for hidding/revealing some parts -->
     <script src="main.js" type="module"></script>
 
 </body>
