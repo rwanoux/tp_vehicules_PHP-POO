@@ -1,0 +1,15 @@
+@keyframes editing {
+    0% {
+        background-color: gray;
+    }
+    50% {
+        background-color: chartreuse;
+    }
+    100% {
+        background-color: gray;
+    }
+}
+.editing {
+    animation: editing 2.5s ease-in-out infinite;
+    background-color: aliceblue;
+}
